@@ -53,3 +53,23 @@
     background-color: #005bb5;
   }
   
+  /* Al final del archivo */
+
+.intro {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #555;
+  }
+  
+  .benefits {
+    list-style: disc inside;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
