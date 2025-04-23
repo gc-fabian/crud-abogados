@@ -1,88 +1,123 @@
 /* styles/Abogados.module.css */
-
 .container {
-    max-width: 600px;
+    max-width: 800px;
     margin: 2rem auto;
-    padding: 1.5rem;
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 2rem;
+    background: var(--background);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
   }
   
-  /* Ahora scopeamos el título dentro de .container */
-  .container h1 {
-    margin-bottom: 1rem;
-    font-size: 1.75rem;
-    color: #111;
+  .header {
     text-align: center;
+    margin-bottom: 2rem;
   }
   
-  /* Para el formulario */
+  .header h1 {
+    font-size: 2rem;
+    color: var(--foreground);
+  }
+  
+  .tableWrapper {
+    overflow-x: auto;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+  }
+  
+  .table th,
+  .table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+  }
+  
+  .table thead {
+    background: rgba(0,0,0,0.05);
+  }
+  
+  .table tbody tr:nth-child(even) {
+    background: rgba(0,0,0,0.03);
+  }
+  
+  .table tbody tr:hover {
+    background: rgba(0,0,0,0.08);
+  }
+  
+  .actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color .2s;
+  }
+  
+  .btnEdit {
+    background: #f0ad4e;
+    color: #fff;
+  }
+  .btnEdit:hover {
+    background: #ec971f;
+  }
+  
+  .btnDelete {
+    background: #d9534f;
+    color: #fff;
+  }
+  .btnDelete:hover {
+    background: #c9302c;
+  }
+  
+  .card {
+    background: var(--background);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
   .field {
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
   }
   .field label {
     display: block;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.5rem;
     font-weight: 600;
-    color: #333;
+    color: var(--foreground);
   }
   .field input {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 6px;
     font-size: 1rem;
   }
+  .field input:focus {
+    outline: none;
+    border-color: var(--foreground);
+  }
   
-  /* Botones dentro de .container */
-  .container button {
+  .btnSubmit {
     display: block;
     width: 100%;
-    padding: 0.75rem;
-    background-color: #0070f3;
-    color: white;
+    background: var(--foreground);
+    color: var(--background);
     font-size: 1rem;
-    font-weight: 600;
+    padding: 0.75rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     transition: background-color .2s;
   }
-  .container button:hover {
-    background-color: #005bb5;
-  }
-  
-  /* Tabla de lista */
-  .table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-  }
-  .table th,
-  .table td {
-    border-bottom: 1px solid #ddd;
-    padding: 0.75rem;
-    text-align: left;
-  }
-  .table tbody tr:hover {
-    background-color: #f9f9f9;
-  }
-  
-  /* Estas clases ya las usabas en pages/index.js */
-  .intro {
-    text-align: center;
-    margin-bottom: 1rem;
-    color: #555;
-  }
-  .benefits {
-    list-style: disc inside;
-    margin-bottom: 1.5rem;
-    color: #333;
-  }
-  .actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
+  .btnSubmit:hover {
+    background: rgba(0,0,0,0.8);
   }
   

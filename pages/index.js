@@ -1,15 +1,20 @@
 // pages/index.js
 import Link from 'next/link'
+import styles from '../styles/Index.module.css'
 
 export default function Home() {
   return (
-    <div style={{ padding: '2rem', textAlign: 'center' }}>
-      <h1>Bienvenido al CRUD de Abogados</h1>
-      <p>
+    <div className={styles.page}>
+      <h1>👩‍⚖️ Sistema de Abogados</h1>
+      <p>Esta pequeña aplicación te permite gestionar tu base de datos de abogados de forma sencilla:</p>
+      <div className="ctas">
         <Link href="/abogados">
-          <a>Ver lista de abogados →</a>
+          <button className="viewList">📋 Ver lista</button>
         </Link>
-      </p>
+        <Link href="/abogados/nuevo">
+          <button className="newItem">➕ Nuevo abogado</button>
+        </Link>
+      </div>
     </div>
   )
 }
