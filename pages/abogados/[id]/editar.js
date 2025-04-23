@@ -1,52 +1,114 @@
 // pages/abogados/[id]/editar.js
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+import styles from '../../../styles/Abogados.module.css'
+
+const ESPECIALIDADES = [
+  'Civil',
+  'Penal',
+  'Laboral',
+  'Familia',
+  'Comercial',
+  'Ambiental',
+  'Constitucional',
+  'Mercantil'
+]
 
 export default function EditarAbogado() {
-  const router = useRouter();
-  const { id } = router.query;
-  const [form, setForm] = useState(null);
+  const router = useRouter()
+  const { id } = router.query
+  const [form, setForm] = useState({
+    nombre: '',
+    especialidad: '',
+    email: '',
+    telefono: ''
+  })
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (!id) return;
+    if (!id) return
     fetch(`/api/abogados/${id}`)
-      .then(res => res.json())
-      .then(a => setForm(a));
-  }, [id]);
+      .then((res) => res.json())
+      .then((data) => {
+        setForm({
+          nombre: data.nombre || '',
+          especialidad: data.especialidad || '',
+          email: data.email || '',
+          telefono: data.telefono || ''
+        })
+        setLoading(false)
+      })
+      .catch(() => setLoading(false))
+  }, [id])
 
-  if (!form) return <p>Cargando...</p>;
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value })
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     await fetch(`/api/abogados/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
-    });
-    router.push('/abogados');
-  };
+      body: JSON.stringify(form)
+    })
+    router.push('/abogados')
+  }
+
+  if (loading) return <p style={{ textAlign: 'center' }}>Cargando...</p>
 
   return (
-    <div style={{ padding: '1rem' }}>
+    <div className={styles.container}>
       <h1>Editar Abogado</h1>
       <form onSubmit={handleSubmit}>
-        {['nombre','especialidad','email','telefono'].map((field) => (
-          <div key={field} style={{ margin: '0.5rem 0' }}>
-            <label style={{ display: 'block' }}>{field.charAt(0).toUpperCase()+field.slice(1)}:</label>
-            <input
-              name={field}
-              value={form[field]}
-              onChange={handleChange}
-              required
-              style={{ width: '100%', padding: '0.5rem' }}
-            />
-          </div>
-        ))}
-        <button type="submit">Guardar</button>
+        <div className={styles.field}>
+          <label>Nombre</label>
+          <input
+            name="nombre"
+            value={form.nombre}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className={styles.field}>
+          <label>Especialidad</label>
+          <input
+            list="especialidades"
+            name="especialidad"
+            value={form.especialidad}
+            onChange={handleChange}
+            required
+          />
+          <datalist id="especialidades">
+            {ESPECIALIDADES.map((esp) => (
+              <option value={esp} key={esp} />
+            ))}
+          </datalist>
+        </div>
+
+        <div className={styles.field}>
+          <label>Email</label>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className={styles.field}>
+          <label>Teléfono</label>
+          <input
+            name="telefono"
+            value={form.telefono}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <button type="submit">Guardar cambios</button>
       </form>
     </div>
-  );
+  )
 }
